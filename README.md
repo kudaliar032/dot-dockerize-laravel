@@ -4,8 +4,8 @@ Digunakan untuk menjalankan project laravel menggunakan docker, tampa perlu mela
 ### Stacks ###
 - [x] Apache2
 - [x] PHP7.3/7.2/7.1 dan modul
-- [x] Redis/Latest
-- [x] MariaDB/Latest
+- [x] Redis/latest
+- [x] MariaDB/latest
 - [x] Composer
 
 ### XXX ###
@@ -17,8 +17,8 @@ Digunakan untuk menjalankan project laravel menggunakan docker, tampa perlu mela
 2. Tambahkan environment pada file `.env`
     * DOCKER_WEBAPP_PORT, dengan nilai port yang digunakan mengakses project saat dijalankan
     * DOCKER_PHP_VERSION, dengan nilai versi php yang ingin digunakan pada project
-3. Untuk menjalankan docker gunakan perintah `docker-compose start`
-4. Untuk menghentikan dokcer yang telah berjalan gunakan perintah `docker-compose stop`
+3. Untuk menjalankan gunakan perintah `docker-compose up`
+4. Untuk menghentikan cukup tekan `Ctrl+C`
 
 ### Mengakses Database SQL ###
 1. Masukan perintah `docker-compose exec mariadb /usr/bin/mysql -p`
