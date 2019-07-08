@@ -20,6 +20,10 @@ sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf /etc/a
 RUN curl -sS https://getcomposer.org/installer | php && \
 mv composer.phar /usr/bin/composer
 
+# replace apache2 configuration default
+ADD https://gist.githubusercontent.com/kudaliar032/e95a80d76f6b023cd925cb321a861c3c/raw/\
+f80507024ed45a3c51adb794c82d3f8e17148627/000-default.conf /etc/apache2/sites-available
+
 # enable apache2 modul
 RUN a2enmod rewrite
 
