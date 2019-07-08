@@ -1,0 +1,35 @@
+version: "2.4"
+services:
+  webapp:
+    image: "dotlabs/laravel-project:php${DOCKER_PHP_VERSION}"
+    volumes:
+      - type: bind
+        source: .
+        target: /var/www/html
+    depends_on:
+      - mariadb
+      - redis
+    ports:
+      - "${DOCKER_WEBAPP_PORT}:80"
+
+  mariadb:
+    image: "mariadb:latest"
+    environment:
+      - MYSQL_ROOT_PASSWORD=toor
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - db-sql-vol:/var/lib/mysql
+
+  redis:
+    image: "redis:latest"
+    environment:
+      - REDIS_PASSWORD=toor
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - db-redis-vol:/data
+
+volumes:
+  db-sql-vol:
+  db-redis-vol:
