@@ -13,7 +13,7 @@ Digunakan untuk menjalankan project laravel menggunakan docker, tampa perlu mela
 - Redis default password, `toor`
 
 ### Cara Penggunaan ###
-1. Download/simpan file `docker-compose.yml` menjadi satu dengan project laravel
+1. Download/simpan file `docker-compose.yml` menjadi satu directory dengan project laravel
 2. Tambahkan environment pada file `.env`
     * DOCKER_WEBAPP_PORT, dengan nilai port yang digunakan mengakses project saat dijalankan
     * DOCKER_PHP_VERSION, dengan nilai versi php yang ingin digunakan pada project
