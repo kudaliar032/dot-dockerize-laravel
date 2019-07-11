@@ -12,7 +12,7 @@ RUN ln -s /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/libldap.so \
 
 # install php extension
 RUN pecl install mongodb-1.5.1
-RUN docker-php-ext-install pdo_mysql intl gd zip bz2 opcache ldap bcmath mysql mysqli
+RUN docker-php-ext-install pdo_mysql intl gd zip bz2 opcache ldap bcmath mysqli
 RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/mongodb.ini
 
 # change vhost directory
