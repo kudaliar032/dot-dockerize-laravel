@@ -1,28 +1,28 @@
 # Laravel Dockerize
-Digunakan untuk menjalankan project laravel menggunakan docker, tampa perlu melakukan installasi dan konfigurasi pada server.
+Digunakan untuk menjalankan project laravel menggunakan docker, sehingga dapat mempermudah developer tanpa perlu menginstall dan mempersiapkan environment yang akan digunakan.
 
-### Stacks ###
-- [x] Apache2
-- [x] PHP7.3/7.2/7.1 dan modul
-- [x] Redis/latest
-- [x] MariaDB/latest
+### Stacks: ###
+- [x] Apache2 (rewrite, headers)
+- [x] PHP7.3/7.2/7.1/5.6 (pdo_mysql, intl, gd, zip, bz2, opcache, ldap, bcmath, mysqli, mongodb)
+- [x] Redis
+- [x] MariaDB
 - [x] Composer
+- [x] GNU Nano
+- [x] phpMyAdmin
 
-### XXX ###
-- MariaDB root password, `toor`
-- Redis default password, `toor`
+### Password akses: ###
+- MariaDB, root: `toor`
+- Redis, `toor`
 
-### Cara Penggunaan ###
+### Cara penggunaan: ###
 1. Download/simpan file `docker-compose.yml` menjadi satu directory dengan project laravel
-2. Tambahkan environment pada file `.env`
+2. Tambahkan environment baru pada file `.env`
     * DOCKER_WEBAPP_PORT, dengan nilai port yang digunakan mengakses project saat dijalankan
     * DOCKER_PHP_VERSION, dengan nilai versi php yang ingin digunakan pada project
-3. Untuk menjalankan gunakan perintah `docker-compose up`
-4. Untuk menghentikan cukup tekan `Ctrl+C`
+3. Build terlebih dahulu containernya dengan perintah `docker-compose up --no-start`
+4. Kemudian, jalankan services dengan perintah `docker-compose start`
+5. Untuk menghentikan services yang berjalan gunakan perintah `docker-compose stop`
+6. Terakhir, untuk membersikan container yang telah dibuild gunakan perintah `docker-compose down`
 
-### Mengakses Database SQL ###
-1. Masukan perintah `docker-compose exec mariadb /usr/bin/mysql -p`
-2. Masukan password dari user root
-
-### Note ###
-Untuk menjalankan perintah docker-compose pastikan berada dalam directory `docker-compose.yml` berada
+### Catatan: ###
+* Untuk menjalankan perintah docker-compose pastikan berada dalam directory `docker-compose.yml` berada
