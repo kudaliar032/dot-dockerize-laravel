@@ -1,7 +1,7 @@
 version: "2.4"
 services:
   webapp:
-    image: "dotlabs/laravel-project:php${DOCKER_PHP_VERSION}"
+    image: "dotlabs/apache:php${DOCKER_PHP_VERSION}"
     volumes:
       - type: bind
         source: .
