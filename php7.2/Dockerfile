@@ -25,7 +25,7 @@ ADD https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-english.t
 RUN tar -xvf /tmp/phpMyAdmin-4.9.0.1-english.tar.gz -C / && mv /phpMyAdmin-4.9.0.1-english /pma &&\
 chown www-data:www-data -R /pma && chmod +x -R /pma
 ADD https://gist.githubusercontent.com/kudaliar032/9e905243c3535d1aa8d173db076710fd/raw/\
-7731b0af170c754e3d751bace1965da0e7fb8c2d/config.inc.php /pma
+1db5907f8a0f2f31b4e11784a94cb26c05117d0e/config.inc.php /pma
 RUN chown www-data:www-data /pma/config.inc.php && chmod 755 /pma/config.inc.php
 
 # replace apache2 configuration default
