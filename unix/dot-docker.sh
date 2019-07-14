@@ -1,7 +1,7 @@
 #!/bin/bash
 case $1 in
   build) docker-compose up --no-start;;
-  clean) docker-compose down;;
+  clear) docker-compose down;;
   start) docker-compose start;;
   stop) docker-compose stop;;
   webapp|database|redis) docker-compose exec $@;;
