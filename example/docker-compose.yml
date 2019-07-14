@@ -1,7 +1,7 @@
 version: "3.0"
 services:
   webapp:
-    image: dotlabs/apache:php${DOCKER_PHP_VERSION}
+    build: .
     volumes:
       - ".:/var/www/html"
     depends_on:
