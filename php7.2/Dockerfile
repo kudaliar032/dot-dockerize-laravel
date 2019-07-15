@@ -36,3 +36,8 @@ RUN a2enmod rewrite headers
 
 # clean cache
 RUN rm -rf /var/cache/apt/archives/* && rm -rf /tmp/*
+
+# change storage directory permission and run apache2
+ADD https://raw.githubusercontent.com/kudaliar032/dot-dockerize-laravel/master/config/docker-start /usr/local/bin
+RUN chmod +x /usr/local/bin/docker-start
+CMD ["docker-start"]
