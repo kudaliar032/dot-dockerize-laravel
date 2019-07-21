@@ -1,16 +1,27 @@
-FROM php:7.3-apache
+FROM php:7.3-apache-stretch
 
 # update repos and install lib
 RUN apt update -y && apt install -y libcurl4-gnutls-dev libicu-dev \
 libmcrypt-dev libvpx-dev libjpeg-dev libpng-dev libxpm-dev zlib1g-dev libfreetype6-dev \
 libxml2-dev libexpat1-dev libbz2-dev libgmp3-dev libldap2-dev \
 unixodbc-dev libpq-dev libsqlite3-dev libaspell-dev \
-libsnmp-dev libpcre3-dev libtidy-dev zip unzip gnupg libzip-dev nano git
+libsnmp-dev libpcre3-dev libtidy-dev zip unzip libzip-dev nano git gnupg apt-transport-https locales
+
+# set locale
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
+
+# add sqlserver repos and instal sql server tools
+RUN curl -sS https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
+curl -sS https://packages.microsoft.com/config/debian/9/prod.list > /etc/apt/sources.list.d/mssql-release.list
+RUN apt update -y && ACCEPT_EULA=Y apt install -y msodbcsql17 mssql-tools
+RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
+RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+RUN /bin/bash -c "source ~/.bashrc"
 
 # install php extension
-RUN pecl install mongodb-1.5.1
+RUN pecl install mongodb pdo_sqlsrv sqlsrv
 RUN docker-php-ext-install pdo_mysql intl gd zip bz2 opcache ldap bcmath mysqli
-RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/mongodb.ini
+RUN docker-php-ext-enable pdo_sqlsrv sqlsrv mongodb
 
 # change vhost directory
 RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf && \
@@ -35,6 +46,7 @@ ADD https://raw.githubusercontent.com/kudaliar032/dot-dockerize-laravel/master/c
 RUN a2enmod rewrite headers
 
 # clean cache
+RUN apt autoremove
 RUN rm -rf /var/cache/apt/archives/* && rm -rf /tmp/*
 
 # change storage directory permission and run apache2
