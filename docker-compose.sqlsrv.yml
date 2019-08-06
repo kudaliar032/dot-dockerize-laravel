@@ -1,0 +1,26 @@
+version: "3.0"
+services:
+  webapp:
+    image: dotlabs/apache:php7.3
+    volumes:
+      - ".:/var/www/html"
+    depends_on:
+      - database
+    ports:
+      - 8000:80
+
+  database:
+    image: "mcr.microsoft.com/mssql/server:2017-latest-ubuntu"
+    environment:
+      - SA_PASSWORD=sangatrahasiasekali
+      - ACCEPT_EULA=Y
+      - TZ=Asia/Jakarta
+    volumes:
+      - "database-vol:/var/opt/mssql"
+    ports:
+      - 1433:1433
+
+volumes:
+  database-vol:
+  redis-vol:
+
